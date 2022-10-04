@@ -1,12 +1,12 @@
-﻿using Figure.Core.Entities;
+﻿using Figure.DataAccess.Entities;
 using System.Linq.Expressions;
 
 namespace Figure.DataAccess.Interfaces;
-internal interface IRepository<T> where T : IEntity {
+public interface IRepository<T> where T : IEntity {
     Task CreateAsync(T entity);
     Task UpdateAsync(T entity);
     Task RemoveAsync(T entity);
     Task<T> GetAsync(Expression<Func<T,bool>>? filter,bool tracked = true);
-    Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter, int pageSize, int pageNumber);
+    Task<IEnumerable<T>> GetAllAsync(int pageSize, int pageNumber, Expression<Func<T, bool>>? filter = null);
 }
 

@@ -5,11 +5,9 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Figure.API", "FigureAPI\Figure.API.csproj", "{02C86809-5E98-4F57-822A-6F509C3CC6FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Figure.DataAccess", "Figure.DataAccess\Figure.DataAccess.csproj", "{729BF3D7-514B-4326-895B-09B335320983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Figure.DataAccess", "Figure.DataAccess\Figure.DataAccess.csproj", "{729BF3D7-514B-4326-895B-09B335320983}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Figure.Application", "Figure.Application\Figure.Application.csproj", "{74D53372-C09F-4A16-887A-2EF453AD9CC6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Figure.Core", "Figure.Core\Figure.Core.csproj", "{009C2BB1-466C-498B-B1D9-6BE9772E4969}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Figure.Core", "Figure.Core\Figure.Core.csproj", "{009C2BB1-466C-498B-B1D9-6BE9772E4969}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		{729BF3D7-514B-4326-895B-09B335320983}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{729BF3D7-514B-4326-895B-09B335320983}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{729BF3D7-514B-4326-895B-09B335320983}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74D53372-C09F-4A16-887A-2EF453AD9CC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74D53372-C09F-4A16-887A-2EF453AD9CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74D53372-C09F-4A16-887A-2EF453AD9CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74D53372-C09F-4A16-887A-2EF453AD9CC6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{009C2BB1-466C-498B-B1D9-6BE9772E4969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{009C2BB1-466C-498B-B1D9-6BE9772E4969}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{009C2BB1-466C-498B-B1D9-6BE9772E4969}.Release|Any CPU.ActiveCfg = Release|Any CPU

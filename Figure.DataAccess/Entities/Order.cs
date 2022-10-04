@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Figure.Core.Entities;
-internal class Order : IEntity{
+namespace Figure.DataAccess.Entities;
+public class Order : IEntity {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
     public string? Name { get; set; }
     public string? Email { get; set; }

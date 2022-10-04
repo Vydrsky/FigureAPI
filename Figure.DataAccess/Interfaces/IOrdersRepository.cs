@@ -1,7 +1,7 @@
-﻿using Figure.Core.Entities;
+﻿using Figure.DataAccess.Entities;
 
 namespace Figure.DataAccess.Interfaces;
-internal interface IOrdersRepository<T> where T : IEntity {
-    Task Archive(Task entity);
-    Task UnArchive(Task entity);
+public interface IOrdersRepository : IRepository<Order>{
+    Task Archive(Order order);
+    Task UnArchive(Order order);
 }

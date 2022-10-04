@@ -17,11 +17,13 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Serilog" Version="2.12.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Figure.Application\Figure.Application.csproj" />
+    <ProjectReference Include="..\Figure.Core\Figure.Core.csproj" />
+    <ProjectReference Include="..\Figure.DataAccess\Figure.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
