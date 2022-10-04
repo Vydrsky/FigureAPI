@@ -1,4 +1,4 @@
-﻿using Figure.Core.Handlers;
+﻿using Figure.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Figure.Core;

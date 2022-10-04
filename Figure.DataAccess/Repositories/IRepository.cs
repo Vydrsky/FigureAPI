@@ -1,4 +1,4 @@
-﻿using Figure.DataAccess.Entities;
+﻿using Figure.Infrastructure;
 using System.Linq.Expressions;
 
 namespace Figure.DataAccess.Interfaces;

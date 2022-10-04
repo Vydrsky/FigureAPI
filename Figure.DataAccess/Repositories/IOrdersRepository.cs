@@ -1,4 +1,5 @@
-﻿using Figure.DataAccess.Entities;
+﻿
+using Figure.DataAccess.Entities;
 
 namespace Figure.DataAccess.Interfaces;
 public interface IOrdersRepository : IRepository<Order>{

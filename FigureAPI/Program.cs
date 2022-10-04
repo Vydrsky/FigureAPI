@@ -1,8 +1,8 @@
 using Figure.Core;
+using Figure.Core._Queries.Order;
 using Figure.Core.Handlers.Order;
 using Figure.Core.MappingProfiles;
 using Figure.Core.Models.Order;
-using Figure.Core.Queries;
 using Figure.DataAccess;
 using Figure.DataAccess.Interfaces;
 using Figure.DataAccess.Repositories;
@@ -38,6 +38,7 @@ builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
 
 //HANDLERS
 QueryHandlerConfig.AddQueryHandler<GetAllOrdersQuery, IEnumerable<ReadOrderModel>, GetAllOrdersQueryHandler>(builder.Services);
+QueryHandlerConfig.AddQueryHandler<GetOrderQuery, ReadOrderModel, GetOrderQueryHandler>(builder.Services);
 
 var app = builder.Build();
 

@@ -1,5 +1,5 @@
-﻿using Figure.DataAccess.Entities;
-using Figure.DataAccess.Interfaces;
+﻿using Figure.DataAccess.Interfaces;
+using Figure.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
