@@ -1,3 +1,5 @@
+using Figure.Application._Commands;
+using Figure.Application.Handlers.Order;
 using Figure.Core;
 using Figure.Core._Queries.Order;
 using Figure.Core.Handlers.Order;
@@ -12,7 +14,7 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 //CONTROLLERS
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 
 //SEEDERS
 builder.Services.AddSingleton<IDbSeeder, DbSeeder>();
@@ -39,6 +41,10 @@ builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
 //HANDLERS
 QueryHandlerConfig.AddQueryHandler<GetAllOrdersQuery, IEnumerable<ReadOrderModel>, GetAllOrdersQueryHandler>(builder.Services);
 QueryHandlerConfig.AddQueryHandler<GetOrderQuery, ReadOrderModel, GetOrderQueryHandler>(builder.Services);
+CommandHandlerConfig.AddCommandHandler<PostOrderCommand, PostOrderCommandHandler>(builder.Services);
+CommandHandlerConfig.AddCommandHandler<UpdateOrderCommand, UpdateOrderCommandHandler>(builder.Services);
+CommandHandlerConfig.AddCommandHandler<DeleteOrderCommand, DeleteOrderCommandHandler>(builder.Services);
+CommandHandlerConfig.AddCommandHandler<PatchOrderCommand, PatchOrderCommandHandler>(builder.Services);
 
 var app = builder.Build();
 

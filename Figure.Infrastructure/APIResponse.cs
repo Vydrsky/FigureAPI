@@ -18,6 +18,13 @@ public class APIResponse {
         Content = content;
     }
 
+    public void PrepForNoContent() {
+        IsSuccess = true;
+        ErrorMessages = new List<string>();
+        StatusCode = HttpStatusCode.NoContent;
+        Content = null;
+    }
+
     public void PrepForBadRequest(List<string> errors) {
         IsSuccess = false;
         ErrorMessages = errors;
