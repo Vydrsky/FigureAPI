@@ -9,26 +9,16 @@ public class OrdersRepository : Repository<Order>,IOrdersRepository {
         _context = context;
     }
     public async Task Archive(Order order) {
-        Order entity = _context.Orders.Where(o => o.Id == order.Id).FirstOrDefault();
+        order.ArchivedAt = DateTime.Now;
+        order.IsArchived = true;
 
-        if (entity == null)
-            return;
-
-        entity.ArchivedAt = DateTime.Now;
-        entity.IsArchived = true;
-
-        await UpdateAsync(entity);
+        await UpdateAsync(order);
     }
 
-    public async Task UnArchive(Order order) {
-        Order entity = _context.Orders.Where(o => o.Id == order.Id).FirstOrDefault();
+    public async Task DeArchive(Order order) {
+        order.ArchivedAt = null;
+        order.IsArchived = false;
 
-        if (entity == null)
-            return;
-
-        entity.ArchivedAt = null;
-        entity.IsArchived = false;
-
-        await UpdateAsync(entity);
+        await UpdateAsync(order);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Figure.Application._Commands;
+﻿using Figure.Application._Commands.Order;
 using Figure.Application.Exceptions;
 using Figure.DataAccess.Interfaces;
 using Figure.Infrastructure;

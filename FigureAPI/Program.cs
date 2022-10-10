@@ -1,4 +1,4 @@
-using Figure.Application._Commands;
+using Figure.Application._Commands.Order;
 using Figure.Application.Handlers.Order;
 using Figure.Core;
 using Figure.Core._Queries.Order;
@@ -40,11 +40,15 @@ builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
 
 //HANDLERS
 QueryHandlerConfig.AddQueryHandler<GetAllOrdersQuery, IEnumerable<ReadOrderModel>, GetAllOrdersQueryHandler>(builder.Services);
+QueryHandlerConfig.AddQueryHandler<GetArchivedOrdersQuery, IEnumerable<ReadOrderModel>, GetArchivedOrdersQueryHandler>(builder.Services);
+QueryHandlerConfig.AddQueryHandler<GetNotArchivedOrdersQuery, IEnumerable<ReadOrderModel>, GetNotArchivedOrdersQueryHandler>(builder.Services);
 QueryHandlerConfig.AddQueryHandler<GetOrderQuery, ReadOrderModel, GetOrderQueryHandler>(builder.Services);
 CommandHandlerConfig.AddCommandHandler<PostOrderCommand, PostOrderCommandHandler>(builder.Services);
 CommandHandlerConfig.AddCommandHandler<UpdateOrderCommand, UpdateOrderCommandHandler>(builder.Services);
 CommandHandlerConfig.AddCommandHandler<DeleteOrderCommand, DeleteOrderCommandHandler>(builder.Services);
 CommandHandlerConfig.AddCommandHandler<PatchOrderCommand, PatchOrderCommandHandler>(builder.Services);
+CommandHandlerConfig.AddCommandHandler<ArchiveOrderCommand, ArchiveOrderCommandHandler>(builder.Services);
+CommandHandlerConfig.AddCommandHandler<DeArchiveOrderCommand, DeArchiveOrderCommandHandler>(builder.Services);
 
 var app = builder.Build();
 
