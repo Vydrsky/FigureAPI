@@ -1,6 +1,5 @@
 ﻿using Figure.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Net.Http.Headers;
 
 namespace Figure.DataAccess;
 public class ApplicationDbContext : DbContext {
@@ -11,6 +10,7 @@ public class ApplicationDbContext : DbContext {
 	}
 
 	public DbSet<Order> Orders { get; set; }
+	public DbSet<Entities.Figure> Figures { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder) {
 		base.OnModelCreating(modelBuilder);

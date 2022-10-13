@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Figure.Application._Commands.Order;
-using Figure.Core.Models.Order;
+using Figure.Application.Models.Order;
 using Figure.DataAccess.Entities;
 
 namespace Figure.Core.MappingProfiles;

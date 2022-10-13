@@ -1,14 +1,14 @@
 ﻿using Figure.Application._Commands.Order;
+using Figure.Application._Queries.Order;
 using Figure.Application.Exceptions;
-using Figure.Core._Queries.Order;
-using Figure.Core.Models.Order;
+using Figure.Application.Models.Order;
 using Figure.DataAccess.Entities;
 using Figure.Infrastructure;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Figure.API.Controllers;
-[Route("api/figureapi")]
+[Route("api/orders")]
 [ApiController]
 public class OrdersController : ControllerBase {
 	private APIResponse _response;
@@ -21,8 +21,8 @@ public class OrdersController : ControllerBase {
 	[ProducesResponseType(StatusCodes.Status200OK)]
 	public async Task<ActionResult<APIResponse>> GetAllOrders(
 		[FromServices] IQueryHandler<GetAllOrdersQuery, IEnumerable<ReadOrderModel>> handler,
-		int pageSize,
-		int pageNumber,
+		[FromQuery]int pageSize,
+		[FromQuery]int pageNumber,
 		CancellationToken cancellationToken) {
 
 		try {
@@ -40,8 +40,8 @@ public class OrdersController : ControllerBase {
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<APIResponse>> GetArchivedOrders(
         [FromServices] IQueryHandler<GetArchivedOrdersQuery, IEnumerable<ReadOrderModel>> handler,
-        int pageSize,
-        int pageNumber,
+        [FromQuery]int pageSize,
+        [FromQuery]int pageNumber,
         CancellationToken cancellationToken) {
 
         try {
@@ -59,8 +59,8 @@ public class OrdersController : ControllerBase {
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<APIResponse>> GetNotArchivedOrders(
         [FromServices] IQueryHandler<GetNotArchivedOrdersQuery, IEnumerable<ReadOrderModel>> handler,
-        int pageSize,
-        int pageNumber,
+        [FromQuery] int pageSize,
+        [FromQuery] int pageNumber,
         CancellationToken cancellationToken) {
 
         try {

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Figure.Application._Commands.Order;
-using Figure.Core.Models.Order;
 using Figure.DataAccess.Interfaces;
 using Figure.Infrastructure;
 

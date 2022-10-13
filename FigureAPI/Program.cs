@@ -1,10 +1,9 @@
 using Figure.Application._Commands.Order;
+using Figure.Application._Queries.Order;
 using Figure.Application.Handlers.Order;
+using Figure.Application.Models.Order;
 using Figure.Core;
-using Figure.Core._Queries.Order;
-using Figure.Core.Handlers.Order;
 using Figure.Core.MappingProfiles;
-using Figure.Core.Models.Order;
 using Figure.DataAccess;
 using Figure.DataAccess.Interfaces;
 using Figure.DataAccess.Repositories;

@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using Figure.Core._Queries.Order;
-using Figure.Core.Models.Order;
+using Figure.Application._Queries.Order;
+using Figure.Application.Models.Order;
 using Figure.DataAccess.Interfaces;
 using Figure.Infrastructure;
 
-namespace Figure.Core.Handlers.Order;
+namespace Figure.Application.Handlers.Order;
 
 public class GetOrderQueryHandler : IQueryHandler<GetOrderQuery, ReadOrderModel> {
     private readonly IOrdersRepository _ordersRepository;
