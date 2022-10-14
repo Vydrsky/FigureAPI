@@ -12,9 +12,11 @@ public class Repository<T> : IRepository<T> where T : class,IEntity,new() {
         _context = context;
         _set = _context.Set<T>();
     }
-    public async Task CreateAsync(T entity) {
-        await _context.AddAsync(entity);
+    public async Task<Guid> CreateAsync(T entity) {
+        var createdEntity = await _context.AddAsync(entity);
         await _context.SaveChangesAsync();
+
+        return createdEntity.Entity.Id;
     }
 
     public async Task<IEnumerable<T>> GetAllAsync(int pageSize, int pageNumber, Expression<Func<T, bool>>? filter = null) {

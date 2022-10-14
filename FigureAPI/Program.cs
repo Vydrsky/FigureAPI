@@ -7,6 +7,7 @@ using Figure.Core.MappingProfiles;
 using Figure.DataAccess;
 using Figure.DataAccess.Interfaces;
 using Figure.DataAccess.Repositories;
+using Figure.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -20,7 +21,12 @@ builder.Services.AddSingleton<IDbSeeder, DbSeeder>();
 
 //DB CONTEXT
 builder.Services.AddDbContext<ApplicationDbContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    if(builder.Environment.IsDevelopment()){
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    }
+    else {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); // CHANGE THIS FOR ACTUAL DB IN CLOUD
+    }
 });
 
 //AUTOMAPPER

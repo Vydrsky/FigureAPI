@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Figure.DataAccess.Interfaces;
 public interface IRepository<T> where T : IEntity {
-    Task CreateAsync(T entity);
+    Task<Guid> CreateAsync(T entity);
     Task UpdateAsync(T entity);
     Task RemoveAsync(T entity);
     Task<T> GetAsync(Expression<Func<T,bool>>? filter,bool tracked = true);

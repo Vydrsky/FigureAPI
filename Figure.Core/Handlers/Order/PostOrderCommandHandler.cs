@@ -2,11 +2,13 @@
 using Figure.Application._Commands.Order;
 using Figure.DataAccess.Interfaces;
 using Figure.Infrastructure;
+using Microsoft.Extensions.Configuration;
 
 namespace Figure.Application.Handlers.Order;
 public class PostOrderCommandHandler : ICommandHandler<PostOrderCommand> {
     private readonly IOrdersRepository _ordersRepository;
     private readonly IMapper _mapper;
+    private Guid createdId;
 
     public PostOrderCommandHandler(IOrdersRepository ordersRepository, IMapper mapper) {
         _ordersRepository = ordersRepository;
@@ -18,6 +20,8 @@ public class PostOrderCommandHandler : ICommandHandler<PostOrderCommand> {
         entity.ArchivedAt = null;
         entity.CreatedAt = DateTime.Now;
         entity.IsArchived = false;
-        await _ordersRepository.CreateAsync(entity);
+        createdId = await _ordersRepository.CreateAsync(entity);
     }
+
+    public Guid GetCreatedId() => createdId;
 }

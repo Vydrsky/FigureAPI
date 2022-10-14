@@ -8,6 +8,11 @@ internal class OrderBuilder {
         return _order;
     }
 
+    public OrderBuilder AddId(Guid Id) {
+        _order.Id = Id;
+        return this;
+    }
+
     public OrderBuilder AddName(string Name) {
         _order.Name = Name;
         return this;

@@ -25,6 +25,13 @@ public class APIResponse {
         Content = null;
     }
 
+    public void PrepForCreated(Guid Id) {
+        IsSuccess = true;
+        ErrorMessages = new List<string>();
+        StatusCode = HttpStatusCode.Created;
+        Content = Id;
+    }
+
     public void PrepForBadRequest(List<string> errors) {
         IsSuccess = false;
         ErrorMessages = errors;

@@ -1,6 +1,7 @@
 ﻿using Figure.Application._Commands.Order;
 using Figure.Application._Queries.Order;
 using Figure.Application.Exceptions;
+using Figure.Application.Handlers.Order;
 using Figure.Application.Models.Order;
 using Figure.DataAccess.Entities;
 using Figure.Infrastructure;
@@ -28,12 +29,11 @@ public class OrdersController : ControllerBase {
 		try {
 			var result = await handler.Handle(GetAllOrdersQuery.With(pageSize, pageNumber), cancellationToken);
 			_response.PrepForSuccess(result);
-			return Ok(_response);
 		}
 		catch (Exception e) {
 			_response.PrepForException(e);
-			return _response;
 		}
+		return _response;
 	}
 
     [HttpGet("archive")]
@@ -47,12 +47,11 @@ public class OrdersController : ControllerBase {
         try {
             var result = await handler.Handle(GetArchivedOrdersQuery.With(pageSize, pageNumber), cancellationToken);
             _response.PrepForSuccess(result);
-            return Ok(_response);
         }
         catch (Exception e) {
             _response.PrepForException(e);
-            return _response;
         }
+        return _response;
     }
 
     [HttpGet("dearchive")]
@@ -66,12 +65,11 @@ public class OrdersController : ControllerBase {
         try {
             var result = await handler.Handle(GetNotArchivedOrdersQuery.With(pageSize, pageNumber), cancellationToken);
             _response.PrepForSuccess(result);
-            return Ok(_response);
         }
         catch (Exception e) {
             _response.PrepForException(e);
-            return _response;
         }
+        return _response;
     }
 
     [HttpGet("{id:guid}")]
@@ -85,16 +83,15 @@ public class OrdersController : ControllerBase {
 			var result = await handler.Handle(GetOrderQuery.With(id), cancellationToken);
 			if (result == null) {
 				_response.PrepForNotFound("Couldn't find the order in the database.");
-				return NotFound(_response);
+				return _response;
 			}
 			_response.PrepForSuccess(result);
-			return Ok(_response);
 		}
 		catch (Exception e) {
 			_response.PrepForException(e);
-			return _response;
 		}
-	}
+        return _response;
+    }
 
 	[HttpPost]
 	[ProducesResponseType(StatusCodes.Status200OK)]
@@ -109,15 +106,14 @@ public class OrdersController : ControllerBase {
 				return _response;
 			}
 			await handler.Handle(command, cancellationToken);
-			_response.PrepForSuccess(null);
-			return Ok(_response);
+			_response.PrepForCreated((handler as PostOrderCommandHandler).GetCreatedId());
 		}
 		catch (Exception e) {
 			_response.PrepForException(e);
-			return _response;
 		}
+        return _response;
 
-	}
+    }
 
 	[HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -134,17 +130,15 @@ public class OrdersController : ControllerBase {
 			}
 			await handler.Handle(command, cancellationToken);
 			_response.PrepForNoContent();
-			return Ok(_response);
 		}
 		catch (NotFoundException nfe) {
 			_response.PrepForNotFound(nfe.Message);
-			return _response;
 		}
 		catch (Exception e) {
 			_response.PrepForException(e);
-			return _response;
 		}
-	}
+        return _response;
+    }
 
 	[HttpDelete("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -156,17 +150,15 @@ public class OrdersController : ControllerBase {
 		try {
 			await handler.Handle(DeleteOrderCommand.With(id), cancellationToken);
 			_response.PrepForNoContent();
-			return Ok(_response);
 		}
 		catch (NotFoundException nfe) {
 			_response.PrepForNotFound(nfe.Message);
-			return _response;
 		}
 		catch (Exception e) {
 			_response.PrepForException(e);
-			return _response;
 		}
-	}
+        return _response;
+    }
 
 	[HttpPatch("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -177,23 +169,21 @@ public class OrdersController : ControllerBase {
 		[FromBody] JsonPatchDocument<Order> jsonPatchDocument,
 		CancellationToken cancellationToken) {
         try {
-			if(jsonPatchDocument == null) {
+			if(jsonPatchDocument.Operations.Count == 0 || jsonPatchDocument == null) {
                 _response.PrepForBadRequest(new List<string>() { "Patch document must not be empty" });
-                return _response;
+				return _response;
             }
 			PatchOrderCommand command = new(Id: id, JsonPatchDocument: jsonPatchDocument);
             await handler.Handle(command, cancellationToken);
             _response.PrepForNoContent();
-            return Ok(_response);
         }
         catch (NotFoundException nfe) {
             _response.PrepForNotFound(nfe.Message);
-            return _response;
         }
         catch (Exception e) {
             _response.PrepForException(e);
-            return _response;
         }
+        return _response;
     }
 
 	[HttpPatch("archive/{id:guid}")]
@@ -204,16 +194,14 @@ public class OrdersController : ControllerBase {
         try {
 			await handler.Handle(ArchiveOrderCommand.With(id:id), cancellationToken);
             _response.PrepForSuccess(null);
-            return Ok(_response);
         }
         catch (NotFoundException nfe) {
             _response.PrepForNotFound(nfe.Message);
-            return _response;
         }
         catch (Exception e) {
             _response.PrepForException(e);
-            return _response;
         }
+        return _response;
     }
 
     [HttpPatch("dearchive/{id:guid}")]
@@ -224,15 +212,13 @@ public class OrdersController : ControllerBase {
         try {
             await handler.Handle(DeArchiveOrderCommand.With(id: id), cancellationToken);
             _response.PrepForSuccess(null);
-            return Ok(_response);
         }
         catch (NotFoundException nfe) {
             _response.PrepForNotFound(nfe.Message);
-            return _response;
         }
         catch (Exception e) {
             _response.PrepForException(e);
-            return _response;
         }
+        return _response;
     }
 }
