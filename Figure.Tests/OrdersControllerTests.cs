@@ -1,4 +1,4 @@
-using Figure.Application.Models.Order;
+using Figure.Application.Models;
 using Figure.DataAccess.Entities;
 using Figure.Infrastructure;
 using Figure.Tests.Builders;

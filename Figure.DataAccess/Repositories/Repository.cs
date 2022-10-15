@@ -1,4 +1,4 @@
-﻿using Figure.DataAccess.Interfaces;
+﻿using Figure.DataAccess.Repositories.Interfaces;
 using Figure.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;

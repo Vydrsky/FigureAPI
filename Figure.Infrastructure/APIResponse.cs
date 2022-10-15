@@ -10,6 +10,8 @@ public class APIResponse {
     public void PrepForException(Exception e) {
         IsSuccess = false;
         ErrorMessages = new List<string> { e.Message };
+        StatusCode = HttpStatusCode.MethodNotAllowed;
+        Content = null;
     }
     public void PrepForSuccess(object? content) {
         IsSuccess = true;

@@ -1,5 +1,6 @@
-﻿namespace Figure.Application.Models.Order;
-public class ReadOrderModel {
+﻿namespace Figure.Application.Models;
+public class ReadOrderModel
+{
     public Guid Id { get; set; }
     public string? Name { get; set; }
     public string? Email { get; set; }

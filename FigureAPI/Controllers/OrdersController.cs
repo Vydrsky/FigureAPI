@@ -1,8 +1,8 @@
 ﻿using Figure.Application._Commands.Order;
 using Figure.Application._Queries.Order;
 using Figure.Application.Exceptions;
-using Figure.Application.Handlers.Order;
-using Figure.Application.Models.Order;
+using Figure.Application.Handlers.Order.CommandHandlers;
+using Figure.Application.Models;
 using Figure.DataAccess.Entities;
 using Figure.Infrastructure;
 using Microsoft.AspNetCore.JsonPatch;

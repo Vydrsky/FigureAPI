@@ -1,13 +1,8 @@
-using Figure.Application._Commands.Order;
-using Figure.Application._Queries.Order;
-using Figure.Application.Handlers.Order;
-using Figure.Application.Models.Order;
-using Figure.Core;
+using Figure.Application;
 using Figure.Core.MappingProfiles;
 using Figure.DataAccess;
-using Figure.DataAccess.Interfaces;
 using Figure.DataAccess.Repositories;
-using Figure.Infrastructure;
+using Figure.DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -42,22 +37,15 @@ builder.Services.AddSwaggerGen();
 
 //REPOSITORIES
 builder.Services.AddScoped<IOrdersRepository, OrdersRepository>();
+builder.Services.AddScoped<IFiguresRepository, FiguresRepository>();
 
 //HANDLERS
-QueryHandlerConfig.AddQueryHandler<GetAllOrdersQuery, IEnumerable<ReadOrderModel>, GetAllOrdersQueryHandler>(builder.Services);
-QueryHandlerConfig.AddQueryHandler<GetArchivedOrdersQuery, IEnumerable<ReadOrderModel>, GetArchivedOrdersQueryHandler>(builder.Services);
-QueryHandlerConfig.AddQueryHandler<GetNotArchivedOrdersQuery, IEnumerable<ReadOrderModel>, GetNotArchivedOrdersQueryHandler>(builder.Services);
-QueryHandlerConfig.AddQueryHandler<GetOrderQuery, ReadOrderModel, GetOrderQueryHandler>(builder.Services);
-CommandHandlerConfig.AddCommandHandler<PostOrderCommand, PostOrderCommandHandler>(builder.Services);
-CommandHandlerConfig.AddCommandHandler<UpdateOrderCommand, UpdateOrderCommandHandler>(builder.Services);
-CommandHandlerConfig.AddCommandHandler<DeleteOrderCommand, DeleteOrderCommandHandler>(builder.Services);
-CommandHandlerConfig.AddCommandHandler<PatchOrderCommand, PatchOrderCommandHandler>(builder.Services);
-CommandHandlerConfig.AddCommandHandler<ArchiveOrderCommand, ArchiveOrderCommandHandler>(builder.Services);
-CommandHandlerConfig.AddCommandHandler<DeArchiveOrderCommand, DeArchiveOrderCommandHandler>(builder.Services);
+HandlerConfig.RegisterAllHandlers(builder.Services);
+
+//----------------------------------------------------------------------------------------------
 
 var app = builder.Build();
 
-//----------------------------------------------------------------------------------------------
 if (app.Environment.IsDevelopment()) {
     app.UseSwagger();
     app.UseSwaggerUI();
@@ -70,3 +58,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+

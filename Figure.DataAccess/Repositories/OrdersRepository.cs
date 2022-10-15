@@ -1,5 +1,5 @@
 ﻿using Figure.DataAccess.Entities;
-using Figure.DataAccess.Interfaces;
+using Figure.DataAccess.Repositories.Interfaces;
 
 namespace Figure.DataAccess.Repositories;
 public class OrdersRepository : Repository<Order>,IOrdersRepository {
