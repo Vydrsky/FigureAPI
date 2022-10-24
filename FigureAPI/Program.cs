@@ -23,11 +23,11 @@ builder.Services.AddSingleton<IDbSeeder, DbSeeder>();
 
 //DB CONTEXT
 builder.Services.AddDbContext<ApplicationDbContext>(options => {
-    if(builder.Environment.IsDevelopment()){
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    if(builder.Environment.IsProduction()){
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));   // CHANGE THIS FOR ACTUAL DB IN CLOUD
     }
     else {
-        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); // CHANGE THIS FOR ACTUAL DB IN CLOUD
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")); 
     }
 });
 
@@ -39,25 +39,27 @@ var log = new LoggerConfiguration().MinimumLevel.Debug().WriteTo.File("Logs/log"
 builder.Services.AddSingleton(typeof(Serilog.ILogger),log);
 
 //AUTH
-builder.Services.AddAuthentication(x => {
-    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(x => {
-    x.RequireHttpsMetadata = false;
-    x.SaveToken = true;
-    x.TokenValidationParameters = new TokenValidationParameters {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("ApiSecretKey"))),
-        ValidateAudience = false,
-        ValidateIssuer = false,
-    };
-});
-builder.Services.AddAuthorization(options => {
-    options.FallbackPolicy = new AuthorizationPolicyBuilder()
-        .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-        .RequireAuthenticatedUser()
-        .Build();
-});
+if (!builder.Environment.IsEnvironment("Testing")) {
+    builder.Services.AddAuthentication(x => {
+        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(x => {
+        x.RequireHttpsMetadata = false;
+        x.SaveToken = true;
+        x.TokenValidationParameters = new TokenValidationParameters {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetValue<string>("ApiSecretKey"))),
+            ValidateAudience = false,
+            ValidateIssuer = false,
+        };
+    });
+    builder.Services.AddAuthorization(options => {
+        options.FallbackPolicy = new AuthorizationPolicyBuilder()
+            .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+            .RequireAuthenticatedUser()
+            .Build();
+    });
+}
 
 //SWAGGER
 builder.Services.AddEndpointsApiExplorer();

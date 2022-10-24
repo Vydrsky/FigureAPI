@@ -1,12 +1,19 @@
 using Figure.Application.Models;
 using Figure.DataAccess.Entities;
+using Figure.DataAccess.Models;
 using Figure.Infrastructure;
 using Figure.Tests.Builders;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Net;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace Figure.Tests;
@@ -19,20 +26,28 @@ public class OrdersControllerTests {
     private readonly string apiPath = "api/orders";
 
     public OrdersControllerTests() {
-        var webAppFactory = new WebApplicationFactory<Program>();
+        var webAppFactory = new WebApplicationFactory<Program>()
+            .WithWebHostBuilder(builder => {
+                builder.UseEnvironment("Testing");
+            });
         _httpClient = webAppFactory.CreateDefaultClient();
+
 
         _settings = new JsonSerializerSettings {
             TypeNameHandling = TypeNameHandling.All
         };
+
     }
 
     [Test]
-    public async Task GetAllOrders_PageSize5_ShouldReturn5Orders() {
+    [TestCase(5, 1)]
+    [TestCase(3, 1)]
+    [TestCase(1, 1)]
+    public async Task GetAllOrders_PageSize5_ShouldReturn5Orders(int pS,int pN) {
         //ARRANGE
         //ACT
-        int pageSize = 5;
-        int pageNumber = 1;
+        int pageSize = pS;
+        int pageNumber = pN;
         var response = await _httpClient.GetAsync(apiPath +"?pageSize=" + pageSize + "&pageNumber=" + pageNumber);
 
 
@@ -41,7 +56,7 @@ public class OrdersControllerTests {
 
         //ASSERT
         Assert.That(response != null && models != null);
-        Assert.That(models.Count() == 5);
+        Assert.That(models.Count() == pS);
     }
 
     [Test]
