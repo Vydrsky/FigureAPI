@@ -18,6 +18,11 @@ internal class OrderBuilder {
         return this;
     }
 
+    public OrderBuilder AddSurname(string Surname) {
+        _order.Surname = Surname;
+        return this;
+    }
+
     public OrderBuilder AddEmail(string Email) {
         _order.Email = Email;
         return this;

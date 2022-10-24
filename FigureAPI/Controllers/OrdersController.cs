@@ -5,6 +5,7 @@ using Figure.Application.Handlers.Order.CommandHandlers;
 using Figure.Application.Models;
 using Figure.DataAccess.Entities;
 using Figure.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 

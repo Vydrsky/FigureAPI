@@ -1,9 +1,7 @@
-﻿using Figure.Infrastructure;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
-namespace Figure.DataAccess.Repositories.Interfaces;
-public interface IRepository<T> where T : IEntity
-{
+namespace Figure.Infrastructure;
+public interface IRepository<T> where T : IEntity {
     Task<Guid> CreateAsync(T entity);
     Task UpdateAsync(T entity);
     Task RemoveAsync(T entity);

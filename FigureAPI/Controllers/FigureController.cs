@@ -5,6 +5,7 @@ using Figure.Application.Exceptions;
 using Figure.Application.Handlers.Figure.CommandHandlers;
 using Figure.Application.Models;
 using Figure.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Figure.API.Controllers;
@@ -19,6 +20,7 @@ public class FigureController : ControllerBase {
     }
 
     [HttpGet]
+    [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<APIResponse>> GetAllFigures(
     [FromServices] IQueryHandler<GetAllFiguresQuery, IEnumerable<ReadFigureModel>> handler,
@@ -36,6 +38,7 @@ public class FigureController : ControllerBase {
     }
 
     [HttpGet("{id:guid}")]
+    [AllowAnonymous]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<APIResponse>> GetFigure(

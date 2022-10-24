@@ -9,6 +9,7 @@ public class DbSeeder : IDbSeeder{
             new Order {
                 Id = Guid.NewGuid(),
                 Name = "test1",
+                Surname = "test1",
                 Email = "adsfdfg",
                 PhoneNumber = "9345435",
                 Description="description1",
@@ -19,6 +20,7 @@ public class DbSeeder : IDbSeeder{
             new Order {
                 Id = Guid.NewGuid(),
                 Name = "test1",
+                Surname = "test1",
                 Email = "adsfdfg",
                 PhoneNumber = "9345435",
                 Description = "description1",
@@ -29,6 +31,7 @@ public class DbSeeder : IDbSeeder{
             new Order {
                 Id = Guid.NewGuid(),
                 Name = "test1",
+                Surname = "test1",
                 Email = "adsfdfg",
                 PhoneNumber = "9345435",
                 Description = "description1",
@@ -39,6 +42,7 @@ public class DbSeeder : IDbSeeder{
             new Order {
                 Id = Guid.NewGuid(),
                 Name = "test1",
+                Surname = "test1",
                 Email = "adsfdfg",
                 PhoneNumber = "9345435",
                 Description = "description1",

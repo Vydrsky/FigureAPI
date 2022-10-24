@@ -113,6 +113,7 @@ public class OrdersControllerTests {
 
         Order order = builder
             .AddName("TEST")
+            .AddSurname("TEST")
             .AddEmail("TEST")
             .AddPhoneNumber("TEST")
             .AddDescription("TEST")
@@ -158,6 +159,7 @@ public class OrdersControllerTests {
         Order order = builder
             .AddId(models.FirstOrDefault().Id)
             .AddName("TEST")
+            .AddSurname("TEST")
             .AddEmail("TEST")
             .AddPhoneNumber("TEST")
             .AddDescription("TEST")
@@ -180,6 +182,7 @@ public class OrdersControllerTests {
         Order order = builder
             .AddId(Guid.NewGuid())
             .AddName("TEST")
+            .AddSurname("TEST")
             .AddEmail("TEST")
             .AddPhoneNumber("TEST")
             .AddDescription("TEST")
@@ -299,6 +302,7 @@ public class OrdersControllerTests {
 
         Order order = builder
             .AddName("TEST")
+            .AddSurname("TEST")
             .AddEmail("TEST")
             .AddPhoneNumber("TEST")
             .AddDescription("TEST")
