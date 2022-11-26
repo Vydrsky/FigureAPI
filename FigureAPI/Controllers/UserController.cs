@@ -37,6 +37,7 @@ public class UserController : ControllerBase {
 	}
 
     [HttpPost("register")]
+	[AllowAnonymous]
     public async Task<ActionResult<APIResponse>> Register([FromBody] RegistrationRequestModel requestModel) {
 
 		bool isUnique = _userRepository.IsUniqueUser(requestModel.UserName);
